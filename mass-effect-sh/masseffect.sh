@@ -182,6 +182,12 @@ masscan --open -p 25672 -iL $RANGE $EXCLUDE --banners -oB rabbitmq $RATE
 echo "masscan --open -p 27017 -iL $RANGE $EXCLUDE --banners -oB mongodb $RATE"
 masscan --open -p 27017 -iL $RANGE $EXCLUDE --banners -oB mongodb $RATE
 
+echo "masscan --open -p 389 -iL $RANGE $EXCLUDE --banners -oB ldap $RATE"
+masscan --open -p 389 -iL $RANGE $EXCLUDE --banners -oB ldap $RATE
+
+echo "masscan --open -p 636 -iL $RANGE $EXCLUDE --banners -oB ldaps $RATE"
+masscan --open -p 636 -iL $RANGE $EXCLUDE --banners -oB ldaps $RATE
+
 # search for titles in banners
 masscan --readscan http | grep title | grep --color=auto -i tomcat
 masscan --readscan http | grep title | grep --color=auto -i bitnami
