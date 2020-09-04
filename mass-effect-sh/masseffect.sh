@@ -43,12 +43,12 @@ usage() {
 Usage: $basename $0 [OPTIONS]
 
  Required:
-  <$RANGE>  File of IP addresses to be scanned
+  -f <file>  File of IP addresses to be scanned
  
  Options:
-  -r        rate to scan
-  -e        file of IP's to be excluded from scan
-  -h        Show this help
+  -r <num>   rate to scan
+  -e <file>  file of IP's to be excluded from scan
+  -h         Show this help
 
 "
 }
@@ -187,6 +187,12 @@ masscan --open -p 389 -iL $RANGE $EXCLUDE --banners -oB ldap $RATE
 
 echo "masscan --open -p 636 -iL $RANGE $EXCLUDE --banners -oB ldaps $RATE"
 masscan --open -p 636 -iL $RANGE $EXCLUDE --banners -oB ldaps $RATE
+
+echo "masscan --open -p 9999,30718 -iL $RANGE $EXCLUDE --banners -oB lantronix $RATE"
+masscan --open -p 9999,30718 -iL $RANGE $EXCLUDE --banners -oB lantronix $RATE
+
+echo "masscan --open -p 8000,50000,50013 -iL $RANGE $EXCLUDE --banners -oB sap $RATE"
+masscan --open -p 8000,50000,50013 -iL $RANGE $EXCLUDE --banners -oB sap $RATE
 
 # search for titles in banners
 masscan --readscan http | grep title | grep --color=auto -i tomcat
