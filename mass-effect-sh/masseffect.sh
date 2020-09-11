@@ -194,6 +194,9 @@ masscan --open -p 9999,30718 -iL $RANGE $EXCLUDE --banners -oB lantronix $RATE
 echo "masscan --open -p 8000,50000,50013 -iL $RANGE $EXCLUDE --banners -oB sap $RATE"
 masscan --open -p 8000,50000,50013 -iL $RANGE $EXCLUDE --banners -oB sap $RATE
 
+echo "masscan --open -p 3260 -iL $RANGE $EXCLUDE --banners -oB iSCSI $RATE"
+masscan --open -p 3260 -iL $RANGE $EXCLUDE --banners -oB iSCSI $RATE
+
 # search for titles in banners
 masscan --readscan http | grep title | grep --color=auto -i tomcat
 masscan --readscan http | grep title | grep --color=auto -i bitnami
