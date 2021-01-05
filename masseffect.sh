@@ -198,7 +198,10 @@ echo "masscan --open -p 3260 -iL $RANGE $EXCLUDE --banners -oB iSCSI $RATE"
 masscan --open -p 3260 -iL $RANGE $EXCLUDE --banners -oB iSCSI $RATE
 
 echo "masscan --open -p 9010 -iL $RANGE $EXCLUDE --banners -oB track-it $RATE"
-masscan --open -p 3260 -iL $RANGE $EXCLUDE --banners -oB iSCSI $RATE
+masscan --open -p 9010 -iL $RANGE $EXCLUDE --banners -oB track-it $RATE
+
+echo "masscan --open -p 1818,50000 -iL $RANGE $EXCLUDE --banners -oB sage $RATE"
+masscan --open -p 1818,50000 -iL $RANGE $EXCLUDE --banners -oB sage $RATE
 
 # search for titles in banners
 masscan --readscan http | grep title | grep --color=auto -i tomcat
