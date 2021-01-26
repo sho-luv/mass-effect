@@ -100,12 +100,13 @@ echo "iptables -A INPUT -p tcp --dport 60000 -j DROP"
 iptables -A INPUT -p tcp --dport 60000 -j DROP
 echo "masscan --open -p 80,443,8080,8081 -iL $RANGE $EXCLUDE --banners -oB http $RATE --source-port 60000"
 masscan --open -p 80,443,8080,8081 -iL $RANGE $EXCLUDE --banners -oB http $RATE --source-port 60000
+masscan --readscan http -oX http.xml
 echo "iptables -D INPUT -p tcp --dport 60000 -j DROP"
 iptables -D INPUT -p tcp --dport 60000 -j DROP
 
 echo "masscan --open -p U:161 -iL $RANGE $EXCLUDE --banners -oB snmp $RATE"
 masscan --open -p U:161 -iL $RANGE $EXCLUDE --banners -oB snmp $RATE
-masscan --readscan snmp | awk '{print $6}' > snmp.txt
+masscan --readscan snmp | grep Discovered | awk '{print $6}' > snmp.txt
 
 # consider using iker.py masscan having issues with udp...
 echo "masscan --open -p U:500 -iL $RANGE $EXCLUDE --banners -oB ike $RATE"
