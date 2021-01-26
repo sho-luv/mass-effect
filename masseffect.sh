@@ -1,5 +1,21 @@
 #!/bin/bash
 
+############################################
+# by Leon Johnson
+#
+# This is a program to scan for exploitable 
+# services and create files to be used to 
+# pass to other tools to examinie them
+# 
+# this program will do the following:
+# [x] scan for services I know how to exploit
+# [x] create files of these services to be used with other tools
+# [x] Run screenshot tools like aquatone, and gowitness 
+# [x] identify jenkins and tomcat
+# [ ] run jexboss to check for deserialization bugs
+
+
+
 # Reset
 Off='\033[0m'       # Text Reset
 
@@ -234,3 +250,17 @@ masscan --readscan http | grep title | grep --color=auto -i jenkins
 
 # delete files of size zero
 find ./ -size 0 -print0 | xargs -0 rm --
+
+# perform web screenshots:
+# make dirs
+mkdir web
+cd web
+mkdir aquatone
+cd aquatone
+# download aquatone
+wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip -O temp.zip && unzip temp.zip && rm README.md && rm LICENSE.txt && rm temp.zip
+# run aquatone
+cat ../../http.xml | ./aquatone
+
+cd .. && mkdir gowitness && cd gowitness
+gowitness nmap -f ../../http.xml
