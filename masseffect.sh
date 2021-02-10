@@ -252,15 +252,30 @@ masscan --readscan http | grep title | grep --color=auto -i jenkins
 find ./ -size 0 -print0 | xargs -0 rm --
 
 # perform web screenshots:
-# make dirs
-mkdir web
-cd web
-mkdir aquatone
-cd aquatone
-# download aquatone
-wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip -O temp.zip && unzip temp.zip && rm README.md && rm LICENSE.txt && rm temp.zip
-# run aquatone
-cat ../../http.xml | ./aquatone
+	mkdir web
+	cd web
 
-cd .. && mkdir gowitness && cd gowitness
-gowitness nmap -f ../../http.xml
+	# Aquatone
+		# create dirs
+		mkdir aquatone && cd aquatone
+
+		# download aquatone
+		wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip -O temp.zip && unzip temp.zip && rm README.md && rm LICENSE.txt && rm temp.zip
+
+		# run aquatone
+		cat ../../http.xml | ./aquatone
+
+	# Gowitness
+		# create dirs
+		cd .. && mkdir gowitness && cd gowitness
+
+		# run gowitness
+		gowitness nmap -f ../../http.xml
+
+# Jexboss
+cd ..
+git clone https://github.com/sho-luv/jexboss.git
+cd jexboss
+sqlite3 gowitness/gowitness.sqlite3 "select url from urls" > urls.txt
+./jexboss.py -mode file-scan -file urls.txt -out jexboss.txt
+
