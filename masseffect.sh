@@ -277,5 +277,5 @@ cd ..
 git clone https://github.com/sho-luv/jexboss.git
 cd jexboss
 sqlite3 gowitness/gowitness.sqlite3 "select url from urls" > urls.txt
-./jexboss.py -mode file-scan -file urls.txt -out jexboss.txt
+./jexboss.py -mode file-scan -file urls.txt -out vulnerable_systems.txt
 
