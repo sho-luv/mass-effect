@@ -149,6 +149,11 @@ echo "masscan --open -p 513 -iL $RANGE $EXCLUDE --banners -oB rlogin $RATE"
 masscan --open -p 513 -iL $RANGE $EXCLUDE --banners -oB rlogin $RATE
 masscan --readscan rlogin | awk '{print $6}' > rlogin.txt
 
+# Apache Tomcat versions 6.x, 7.x, 8.x, and 9.x are found to be vulnerable to this Ghostcat
+echo "masscan --open -p 8009 -iL $RANGE $EXCLUDE --banners -oB ghost_cat $RATE"
+masscan --open -p 8009 -iL $RANGE $EXCLUDE --banners -oB ghost_cat $RATE
+masscan --readscan ghost_cat | awk '{print $6}' > ghost_cat.txt
+
 echo "masscan --open -p 1099 -iL $RANGE $EXCLUDE --banners -oB java-rmi $RATE"
 masscan --open -p 1099 -iL $RANGE $EXCLUDE --banners -oB java-rmi $RATE
 masscan --readscan java-rmi | awk '{print $6}' > java-rmi.txt
@@ -247,6 +252,7 @@ masscan --readscan track-it | awk '{print $6}' > track-it.txt
 masscan --readscan http | grep title | grep --color=auto -i tomcat
 masscan --readscan http | grep title | grep --color=auto -i bitnami
 masscan --readscan http | grep title | grep --color=auto -i jenkins
+masscan --readscan http | grep title | grep --color=auto -i xerox
 
 # delete files of size zero
 find ./ -size 0 -print0 | xargs -0 rm --
