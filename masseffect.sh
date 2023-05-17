@@ -275,8 +275,11 @@ find ./ -size 0 -print0 | xargs -0 rm --
 		# create dirs
 		cd .. && mkdir gowitness && cd gowitness
 
+		# install gowitness
+		go install github.com/sensepost/gowitness@latest
+
 		# run gowitness
-		gowitness nmap -f ../../http.xml
+		~/go/bin/gowitness nmap -f ../../http.xml
 
 # Jexboss
 cd ..
