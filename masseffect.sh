@@ -258,6 +258,21 @@ cd .. && mkdir gowitness && cd gowitness
 go install github.com/sensepost/gowitness@latest
 ~/go/bin/gowitness nmap -f ../../http.xml
 
+		# run aquatone
+		cat ../../http.xml | ./aquatone
+
+	# Gowitness
+		# create dirs
+		cd .. && mkdir gowitness && cd gowitness
+
+		# install gowitness
+		go install github.com/sensepost/gowitness@latest
+
+		# run gowitness
+		~/go/bin/gowitness nmap -f ../../http.xml
+
+# Jexboss
+
 cd ..
 git clone https://github.com/sho-luv/jexboss.git
 cd jexboss
